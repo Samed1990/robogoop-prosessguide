@@ -1,13 +1,47 @@
 import streamlit as st
+from streamlit.components.v1 import html
 
 # Page configuration
 st.set_page_config(
     page_title="Godkjenning - Prosessguide for RoboGOOP",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="expanded"
 )
 
 # Custom CSS for improved styling
+# Custom glowing style for process buttons
+st.markdown("""
+    <style>
+    div[data-testid="stHorizontalBlock"] > div:nth-child(1) div.stButton > button {
+        background-color: #5E8BFF;
+        color: white;
+        font-weight: bold;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 6px rgba(94, 139, 255, 0.4);
+        transition: all 0.3s ease;
+    }
+    div[data-testid="stHorizontalBlock"] > div:nth-child(1) div.stButton > button:hover {
+        background-color: #4A78F0;
+        color: black;
+        box-shadow: 0 0 15px rgba(94, 139, 255, 0.7);
+    }
+
+    div[data-testid="stHorizontalBlock"] > div:nth-child(2) div.stButton > button {
+        background-color: #FF8B8B;
+        color: white;
+        font-weight: bold;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 6px rgba(255, 139, 139, 0.4);
+        transition: all 0.3s ease;
+    }
+    div[data-testid="stHorizontalBlock"] > div:nth-child(2) div.stButton > button:hover {
+        background-color: #FF7575;
+        color: black;
+        box-shadow: 0 0 15px rgba(255, 139, 139, 0.7);
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 st.markdown("""
     <style>
     /* Main theme colors */
@@ -169,39 +203,26 @@ st.markdown("""
 
 # App Header with custom logo
 col_logo, col_title = st.columns([1, 5])
-with col_logo:
-    # Using the RoboGOOP.png image instead of the emoji
+
+# Sidebar RoboGOOP image (unchanged)
+with st.sidebar:
     try:
         from PIL import Image
         import os
-        
-        # Check if the image exists
         if os.path.exists("RoboGOOP.png"):
-            st.image("RoboGOOP.png", width=80)
+            st.image("RoboGOOP.png", width=120)
         else:
-            # Fallback to styled div if image doesn't exist
-            st.markdown("""
-                <div style="text-align: center; padding: 10px;">
-                    <div style="background-color: #5E8BFF; color: white; width: 60px; height: 60px; 
-                                border-radius: 50%; display: flex; align-items: center; 
-                                justify-content: center; font-size: 24px; margin: 0 auto;">
-                        🤖
-                    </div>
-                </div>
-            """, unsafe_allow_html=True)
-    except Exception as e:
-        st.markdown(f"""
-            <div style="text-align: center; padding: 10px;">
-                <div style="background-color: #5E8BFF; color: white; width: 60px; height: 60px; 
-                            border-radius: 50%; display: flex; align-items: center; 
-                            justify-content: center; font-size: 24px; margin: 0 auto;">
-                    🤖
-                </div>
-            </div>
-        """, unsafe_allow_html=True)
+            st.markdown("🤖", unsafe_allow_html=True)
+    except:
+        st.markdown("🤖", unsafe_allow_html=True)
+
 
 with col_title:
-    st.markdown('<h1 class="main-header">Godkjenning - Prosessguide for RoboGOOP</h1>', unsafe_allow_html=True)
+    st.markdown("""
+    <div style="display: flex; align-items: center;">
+        <h1 class="main-header" style="margin: 0;">Godkjenning - Prosessguide for RoboGOOP</h1>
+    </div>
+    """, unsafe_allow_html=True)
 
 # Progress tracker - visual element to show where user is in process
 # Making the process circles clickable
