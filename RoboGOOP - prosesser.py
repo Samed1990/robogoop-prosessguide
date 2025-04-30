@@ -248,7 +248,7 @@ with col1:
         }
         </style>
     """, unsafe_allow_html=True)
-    prosess1 = st.button("📜 Prosess 1: Ekspedering av vedtak ✉️", use_container_width=True)
+    prosess1 = st.button("📜 Prosess 1: Ekspedering av vedtak", use_container_width=True)
     
 with col2:
     st.markdown("""
@@ -261,7 +261,7 @@ with col2:
         }
         </style>
     """, unsafe_allow_html=True)
-    prosess2 = st.button("🔎 Prosess 2: Historikksjekk", use_container_width=True)
+    prosess2 = st.button("💾 Prosess 2: Historikksjekk", use_container_width=True)
 
 # Initialize session state
 if "valg" not in st.session_state:
